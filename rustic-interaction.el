@@ -401,7 +401,7 @@ which calls this, does that afterwards."
 With argument, do it that many times.
 Negative argument -N means move back to Nth preceding end of defun.
 
-Assume that this is called after beginning-of-defun. So point is
+Assume that this is called after `beginning-of-defun'.  So point is
 at the beginning of the defun body.
 
 This is written mainly to be used as `end-of-defun-function' for Rust."
