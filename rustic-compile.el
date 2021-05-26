@@ -259,7 +259,8 @@ ARGS is a plist that affects how the process is run.
         (mode (or (plist-get args :mode) 'rustic-compilation-mode))
         (directory (or (plist-get args :directory) (rustic-buffer-workspace)))
         (sentinel (or (plist-get args :sentinel) #'compilation-sentinel)))
-    (rustic-compilation-setup-buffer buf directory mode)
+    (rustic-compilation-setup-buffer
+     buf (file-name-directory (directory-file-name directory)) mode)
     (setq next-error-last-buffer buf)
     (unless (plist-get args :no-display)
       (funcall rustic-compile-display-method buf))
@@ -489,7 +490,8 @@ In either store the used command in `compilation-arguments'."
                                   (or compilation-arguments
                                       rustic-compile-command))
           rustic-compile-command))
-  (setq compilation-directory (rustic-buffer-workspace))
+  (setq compilation-directory
+        (file-name-directory (directory-file-name (rustic-buffer-workspace))))
   (rustic-compilation-process-live)
   (rustic-compilation-start (split-string compilation-arguments)
                             (list :directory compilation-directory)))
